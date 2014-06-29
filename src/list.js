@@ -12,6 +12,10 @@ List.findById = function(id) {
 	return List.db.findById(id).execQ();
 }
 
+List.findAll = function() {
+    return List.db.findQ();
+}
+
 List.create = function(data) {
 	return List.db.createQ(data);
 }

@@ -5,6 +5,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var router = express.Router();
 var mongoose = require('mongoose');
+var cors = require('cors');
 var List = require('./src/list');
 var Message = require('./src/message');
 
@@ -13,6 +14,7 @@ mongoose.connect('mongodb://localhost/listngo');
 var routes = require('./src/routes')(router);
 
 app.use(bodyParser());
+app.use(cors());
 
 app.use(function(req, res, next){
   console.log('%s %s', req.method, req.url);

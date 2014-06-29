@@ -3,10 +3,15 @@ var Message = require('../message');
 
 module.exports = function(respond, Hasher, PubSub){
     return {
-        find: function(req, res) {
+        findOne: function(req, res) {
             Hasher.decryptHashId(req.params.list)
             .then(List.findById)
             .then(Message.findByList)
+            .then(respond.bind(res, 'Found list'))
+            .fail(function(err) { res.json({error: err.message, stack: err.stack}); });
+        },
+        findAll: function(req, res) {
+            List.findAll()
             .then(respond.bind(res, 'Found list'))
             .fail(function(err) { res.json({error: err.message, stack: err.stack}); });
         },
